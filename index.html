@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REPORTE ETB - 30 OCT 2025</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; padding: 20px; background: #f4f6f9; color: #333; }
+        .container { max-width: 1200px; margin: auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #1a3c6e; margin-bottom: 5px; font-size: 1.8em; }
+        .subtitle { text-align: center; color: #555; font-size: 1.1em; margin-bottom: 20px; }
+        h2 { color: #1a3c6e; border-bottom: 3px solid #4CAF50; padding-bottom: 8px; margin-top: 30px; font-size: 1.4em; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.95em; }
+        th { background: #1a3c6e; color: white; padding: 12px; text-align: center; }
+        td { padding: 10px; border: 1px solid #ddd; text-align: center; }
+        tr:nth-child(even) { background-color: #f8fbff; }
+        .alerta { background-color: #ffebee !important; color: #c62828; font-weight: bold; }
+        .excelente { background-color: #e8f5e9; }
+        .placas { font-size: 0.85em; color: #444; line-height: 1.5; }
+        .grafico { margin: 30px auto; max-width: 600px; height: 350px; }
+        .footer { text-align: center; margin-top: 40px; color: #777; font-size: 0.9em; padding-top: 20px; border-top: 1px solid #eee; }
+        .ok { color: green; font-weight: bold; }
+        .retardado { color: red; font-weight: bold; }
+        .gestion { background: #e3f2fd; padding: 20px; border-radius: 10px; margin-top: 30px; }
+        .top3 { font-size: 1.1em; line-height: 1.8; }
+        @media (max-width: 768px) {
+            table, th, td { font-size: 0.8em; }
+            .grafico { max-width: 100%; height: 300px; }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h1>REPORTE DIARIO ETB - SUPERVISORES</h1>
+    <p class="subtitle"><strong>Fecha:</strong> 30 de octubre de 2025 | <strong>Generado a las:</strong> 05:34 p.m.</p>
+
+    <!-- RESUMEN GENERAL -->
+    <h2>RESUMEN DE ASISTENCIA</h2>
+    <table>
+        <tr><th>Categoría</th><th>Total</th><th>Operando</th><th>%</th><th>No Asistieron</th></tr>
+        <tr class="excelente"><td>👨‍🔧 Técnicos</td><td>143</td><td>125</td><td>87.4%</td><td>18</td></tr>
+        <tr><td>🧰 Auxiliares</td><td>37</td><td>32</td><td>86.5%</td><td>5</td></tr>
+        <tr class="excelente"><td>🛵 Canguros</td><td>6</td><td>6</td><td>100%</td><td>0</td></tr>
+        <tr class="excelente"><td>🚐 Camionetas</td><td>45</td><td>45</td><td>100%</td><td>0</td></tr>
+    </table>
+    <p style="text-align:center; font-weight:bold; font-size:1.2em; color:#1a3c6e;">
+        Total Personal: 232 → <span style="color:#4CAF50;">208 operando (89.7%)</span> | Ausencias: 23
+    </p>
+
+    <!-- GRÁFICO 1: BARRAS -->
+    <h2>ASISTENCIA POR CATEGORÍA</h2>
+    <div class="grafico">
+        <canvas id="barrasChart"></canvas>
+    </div>
+
+    <!-- GRÁFICO 2: DONA -->
+    <h2>AUSENCIAS POR ZONA (TOP 5)</h2>
+    <div class="grafico">
+        <canvas id="donaChart"></canvas>
+    </div>
+
+    <!-- ZONAS ORDENADAS POR HORA DE LLEGADA -->
+    <h2>MAPA DE ZONAS (13 ZONAS) - ORDENADO POR HORA DE REPORTE</h2>
+    <table>
+        <tr>
+            <th>Zona</th>
+            <th>Supervisor</th>
+            <th>Técnicos<br>(Prog/Op)</th>
+            <th>Auxiliares<br>(Prog/Op)</th>
+            <th>Canguros<br>(Prog/Op)</th>
+            <th>Camionetas<br>(Prog/Op)</th>
+            <th>Placas Operando</th>
+            <th>Estado</th>
+            <th>Reporte</th>
+        </tr>
+        <tr class="excelente">
+            <td>MUZU 1</td><td>Armando Rodríguez</td><td>9/9</td><td>3/3</td><td>1/1</td><td>3/3</td>
+            <td class="placas">KNZ285, JLU785, WHS026</td><td>✅</td>
+            <td><strong>07:07</strong> → <span class="ok">OK</span></td>
+        </tr>
+        <tr class="excelente">
+            <td>MUZU 2 / Santa Inés</td><td>Sebastián Santos</td><td>9/8</td><td>3/2</td><td>1/1</td><td>2/2</td>
+            <td class="placas">LJU060, SXU556</td><td>⚠️</td>
+            <td><strong>07:10</strong> → <span class="ok">OK</span></td>
+        </tr>
+        <tr class="excelente">
+            <td>Holanda / Calandaima</td><td>Juan Salinas</td><td>17/16</td><td>4/4</td><td>0/0</td><td>8/8</td>
+            <td class="placas">WLM363, TEQ359, TTQ083, EQQ474, EYY075, EXZ679, JUY478, JUZ142</td><td>✅</td>
+            <td><strong>07:22</strong> → <span class="ok">OK</span></td>
+        </tr>
+        <tr>
+            <td>Suba</td><td>Kevin Hernández</td><td>16/14</td><td>4/4</td><td>0/0</td><td>4/4</td>
+            <td class="placas">WMM695, WLK160, TLM805, WEX568</td><td>⚠️</td>
+            <td><strong>07:23</strong> → <span class="ok">OK</span></td>
+        </tr>
+        <tr class="excelente">
+            <td>Bachué</td><td>Gildardo Augusto Pérez</td><td>7/7</td><td>2/2</td><td>0/0</td><td>5/5</td>
+            <td class="placas">GEV119, TUP125, NOX768, TFR580, LFL173</td><td>✅</td>
+            <td><strong>07:26</strong> → <span class="ok">OK</span></td>
+        </tr>
+        <tr>
+            <td>Chico Norte</td><td>Acero Michael</td><td>13/11</td><td>5/0</td><td>0/0</td><td>3/3</td>
+            <td class="placas">JTX894, WGO532, JVK139</td><td>⚠️</td>
+            <td><strong>07:31</strong> → <span class="retardado">RETARDADO</span></td>
+        </tr>
+        <tr>
+            <td>Fontibón</td><td>Stiven Ardila</td><td>14/12</td><td>7/7</td><td>0/0</td><td>5/5</td>
+            <td class="placas">WGQ138, NOK892, NOK167, WDE168, WDC248</td><td>⚠️</td>
+            <td><strong>07:34</strong> → <span class="retardado">RETARDADO</span></td>
+        </tr>
+        <tr class="excelente">
+            <td>Toberín (Jean C.)</td><td>Jean Carlos</td><td>10/10</td><td>2/2</td><td>0/0</td><td>3/3</td>
+            <td class="placas">EQP286, WHS261, WEI984</td><td>✅</td>
+            <td><strong>07:37</strong> → <span class="retardado">RETARDADO</span></td>
+        </tr>
+        <tr>
+            <td>Toberín (Jimy R.)</td><td>Jimy Rojas</td><td>13/12</td><td>2/1</td><td>1/1</td><td>3/3</td>
+            <td class="placas">WOY553, WLV280, LFL173</td><td>⚠️</td>
+            <td><strong>07:42</strong> → <span class="retardado">RETARDADO</span></td>
+        </tr>
+        <tr>
+            <td>Toberín (Consolidado)</td><td>Jean Carlos / Jimy Rojas</td><td>23/22</td><td>4/3</td><td>1/1</td><td>6/6</td>
+            <td class="placas">WOY553, WLV280, LFL173, EQP286, WHS261, WEI984</td><td>⚠️</td>
+            <td><strong>07:42</strong> → <span class="retardado">RETARDADO</span></td>
+        </tr>
+        <tr>
+            <td>GPON Avanzadas</td><td>Alexander Castiblanco</td><td>8/6</td><td>—</td><td>—</td><td>2/2</td>
+            <td class="placas">FSU867, SSW213</td><td>⚠️</td>
+            <td><strong>07:47</strong> → <span class="retardado">RETARDADO</span></td>
+        </tr>
+        <tr>
+            <td>GPON</td><td>Alexander Castiblanco</td><td>8/7</td><td>1/1</td><td>3/3</td><td>2/2</td>
+            <td class="placas">JTX322, KQR597</td><td>⚠️</td>
+            <td><strong>07:49</strong> → <span class="retardado">RETARDADO</span></td>
+        </tr>
+        <tr class="alerta">
+            <td><strong>Chico</strong></td><td>Carlos Lavacude Cerinza</td><td><strong>14/1</strong></td><td>4/2</td><td>0/0</td><td>4/4</td>
+            <td class="placas">TAS828, WGR012, KNL867, WOW506</td><td>🚨</td>
+            <td><strong>07:57</strong> → <span class="retardado">RETARDADO</span></td>
+        </tr>
+    </table>
+
+    <!-- AUSENCIAS -->
+    <h2>NOVEDADES / AUSENCIAS (23)</h2>
+    <table>
+        <tr><th>Nombre</th><th>Zona</th><th>Motivo</th></tr>
+        <tr><td>Fran Layton</td><td>MUZU 2</td><td>Vacaciones</td></tr>
+        <tr><td>Jian Pierre Pinzón</td><td>MUZU 2</td><td>Capacitación</td></tr>
+        <tr><td>Andrés Cárdenas</td><td>Holanda</td><td>No contesta celular</td></tr>
+        <tr><td>Yeiver Vanegas</td><td>Toberín</td><td>No asiste</td></tr>
+        <tr><td>Leonardo Gamboa</td><td>Toberín</td><td>Permiso</td></tr>
+        <tr><td>Jeferson Rojas</td><td>Suba</td><td>Vacaciones</td></tr>
+        <tr><td>Jhon Pillimue</td><td>Suba</td><td>Renuncia</td></tr>
+        <tr><td>Kevin Mora</td><td>Chico Norte</td><td>Incapacidad</td></tr>
+        <tr><td>Gabriel Niño</td><td>Chico Norte</td><td>Ausencia</td></tr>
+        <tr><td>Handerson Ibarra</td><td>Fontibón</td><td>Vacaciones</td></tr>
+        <tr><td>Cristian Inseca</td><td>Fontibón</td><td>En el médico</td></tr>
+        <tr><td>Yeiver Vanegas</td><td>Toberín (Jimy)</td><td>No asiste</td></tr>
+        <tr><td>Leonardo Gamboa</td><td>Toberín (Jimy)</td><td>Permiso</td></tr>
+        <tr><td>Steven Nieto</td><td>GPON Av.</td><td>No responde</td></tr>
+        <tr><td>Esteban Gómez</td><td>GPON Av.</td><td>No responde</td></tr>
+        <tr><td>Antonio Zúñiga</td><td>GPON</td><td>Trabajo de noche</td></tr>
+        <tr><td>Jair Monsalve</td><td>GPON</td><td>Trabajo de noche</td></tr>
+        <tr><td>Jai Fernández</td><td>Chico</td><td>Día compensatorio</td></tr>
+        <tr><td>Jhonatan Revelo</td><td>Chico</td><td>Fallas en la moto</td></tr>
+        <tr><td>Cristian Mora</td><td>Chico</td><td>Por el paro nacional</td></tr>
+        <tr class="alerta"><td colspan="3"><strong>13 Técnicos no reportados en Chico → Solo 1 operando</strong></td></tr>
+    </table>
+
+    <!-- FLOTA -->
+    <h2>FLOTA OPERATIVA</h2>
+    <p style="text-align:center; font-size:1.6em; color:#4CAF50; margin:20px 0;">
+        <strong>45/45 Camionetas + 6/6 Canguros → 100% EN CAMPO</strong>
+    </p>
+
+    <!-- OBSERVACIONES -->
+    <h2>OBSERVACIONES CLAVE</h2>
+    <ul style="line-height:1.8; font-size:1.05em;">
+        <li><strong>Flota 100% operativa</strong> → Excelente logística.</li>
+        <li><strong>ALERTA ROJA: Zona Chico</strong> → Solo 1 técnico de 14.</li>
+        <li><strong>7 RETARDADOS</strong> → Supervisores: Acero M., Stiven A., Jean C., Jimy R., Alexander C. (2), Carlos L.</li>
+        <li>GPON Avanzadas: 2 no responden → Seguimiento inmediato.</li>
+    </ul>
+
+    <!-- 5 MEJORAS DE GESTIÓN (AL FINAL) -->
+    <div class="gestion">
+        <h2>INDICADORES DE GESTIÓN</h2>
+        <table>
+            <tr><th>Métrica</th><th>Valor</th><th>Estado</th></tr>
+            <tr class="excelente"><td>Promedio de Envío del Reporte</td><td>07:25 a.m.</td><td>✅ OK</td></tr>
+            <tr class="alerta"><td>Cantidad de Supervisores Reportando Tarde</td><td>7/13</td><td>⚠️ 54%</td></tr>
+            <tr class="excelente"><td>Flota operativa</td><td>45/45</td><td>✅ 100%</td></tr>
+            <tr class="excelente"><td>Cumplimiento técnico</td><td>125/143</td><td>✅ 87.4%</td></tr>
+        </table>
+
+        <h2>TOP 3 ZONAS MÁS RÁPIDAS</h2>
+        <ol class="top3">
+            <li><strong>MUZU 1</strong> - Armando Rodríguez - 07:07</li>
+            <li><strong>MUZU 2</strong> - Sebastián Santos - 07:10</li>
+            <li><strong>Holanda</strong> - Juan Salinas - 07:22</li>
+        </ol>
+
+        <h2>ALERTAS AUTOMÁTICAS</h2>
+        <ul style="color:red; font-weight:bold; line-height:1.8;">
+            <li>🚨 7 supervisores RETARDADOS</li>
+            <li>🚧 0 vehículos con novedad</li>
+            <li>⚠️ Zona Chico: solo 1 técnico operando</li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        Generado por Grok | 30 OCT 2025 | <strong>Imprimir: Ctrl + P → Guardar como PDF</strong>
+    </div>
+</div>
+
+<!-- GRÁFICOS -->
+<script>
+    const ctx1 = document.getElementById('barrasChart').getContext('2d');
+    new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: ['Técnicos', 'Auxiliares', 'Canguros', 'Camionetas'],
+            datasets: [{
+                data: [87.4, 86.5, 100, 100],
+                backgroundColor: ['#4CAF50', '#FF9800', '#2196F3', '#9C27B0'],
+                borderRadius: 6
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true, max: 100 } }
+        }
+    });
+
+    const ctx2 = document.getElementById('donaChart').getContext('2d');
+    new Chart(ctx2, {
+        type: 'doughnut',
+        data: {
+            labels: ['Chico (14)', 'Chico Norte (7)', 'Otros (6)'],
+            datasets: [{
+                data: [14, 7, 6],
+                backgroundColor: ['#f44336', '#ff9800', '#ccc']
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: { position: 'bottom' } }
+        }
+    });
+</script>
+
+</body>
+</html>
